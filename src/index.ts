@@ -1,5 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import {serveStatic} from '@hono/node-server/serve-static'
 
 const app = new Hono()
 
@@ -14,3 +15,9 @@ serve({
   fetch: app.fetch,
   port
 })
+
+// Serve files from the 'static' folder
+// The app.use('*') route will capture
+app.use('\*', serveStatic({
+  root: './static',
+})) 
